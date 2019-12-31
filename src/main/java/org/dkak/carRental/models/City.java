@@ -4,10 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 @Entity
 @Table(name="city")
@@ -20,11 +17,6 @@ public class City {
 	@Column(name="CITY_NAME")
 	private String name;
 	
-	@GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getIt() {
-        return "Got it!";
-    }
 	 
 	public City() {
 		

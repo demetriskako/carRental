@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import javax.ws.rs.Path;
 
 @Entity
-@Table(name="city")
+@Table(name = "city")
 @Path("city")
 public class City {
 	

@@ -10,37 +10,29 @@ import org.dkak.carRental.exceptions.DataNotFoundException;
 import org.dkak.carRental.exceptions.GenericException;
 import org.dkak.carRental.models.City;
 import org.dkak.carRental.models.SuccessMessage;
+import org.dkak.carRental.utils.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session; 
 import org.hibernate.Transaction;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+
 
 public class CityService {
 	
-	SessionFactory sessionFactory = null;
-	Session session = null;
-	Transaction tx = null;
+	private Session session = null;
+	private Transaction tx = null;
 	
 	public CityService() {
-		sessionFactory = new Configuration().configure().buildSessionFactory();
-		session = sessionFactory.openSession();
+		session = HibernateUtil.getSessionFactory().openSession();
 		tx = session.beginTransaction();
 	}
 	
 	public List<City> getAllCities() {
 		
-		List<City> cities = new ArrayList<City>();
-		
-		try {
-			cities = session.createNativeQuery("SELECT * FROM city").list();		
-			tx.commit();	
-		} catch (Throwable ex) { 
-			return cities;		 
-	    }  finally {
-	    	session.close();
-	    }	
-		
+		List<City> cities = new ArrayList<>();
+		tx.commit();
+		cities = session.createQuery("from City", City.class).getResultList();		
+	    session.close();
+	    
 		return cities;
 	}
 	
@@ -59,10 +51,13 @@ public class CityService {
 		return city;	    
 	}
 	
-	public City add(City city) {
+	public City add(String id, String name) {
 	
-		City existingCity = session.find(City.class, city.getId());
+		City existingCity = session.find(City.class, id);
+		
 		if(existingCity == null) {
+			City city = new City(id, name);
+			
 			session.save(city);
 			tx.commit();	
 	    	session.close();
@@ -73,7 +68,7 @@ public class CityService {
 		}	
 	}
 	
-	public City update(String id, City city) {
+	public City update(String id, String name) {
 		try {
 			City currentCity = (City)session.get(City.class, id); 
 			 
@@ -81,9 +76,10 @@ public class CityService {
 				throw new DataNotFoundException("City not found");	 			
 			}
 			 
-			currentCity.setName(city.getName());
+			currentCity.setName(name);
 			 
 			session.update(currentCity); 
+			
 		    tx.commit();
 			return currentCity;
 		} catch (HibernateException e) {

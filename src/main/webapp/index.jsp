@@ -1,6 +1,14 @@
 <html>
-
-<body>
-    <a href="cities/">Cities</a>
+	<%@include file="../partials/head.html" %>
+ <body>
+ 	<%@include file="../partials/navigation.html" %>
+	
+	 <div class="container">
+	 
+	 	
+	 </div>
 </body>
+
+<script>
+</script>
 </html>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -37,10 +38,11 @@ public class CityResource {
 	
 	@POST
 	@Path("/create")
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Consumes("application/x-www-form-urlencoded")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response create(City city) {
-		City newCity = cityService.add(city);
+	public Response create(@FormParam("id") String id, @FormParam("name") String name) {
+		City newCity = cityService.add(id, name);
+		
 		return Response.status(Status.CREATED)
 				   .entity(newCity)
 				   .build();	
@@ -48,11 +50,14 @@ public class CityResource {
 	
 	@PUT 
 	@Path("/{cityId}")
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Consumes("application/x-www-form-urlencoded")
 	@Produces(MediaType.APPLICATION_JSON)
-	public City update(@PathParam("cityId") String id, City city) {
-		city.setId(id);
-		return cityService.update(id, city);
+	public Response update(@PathParam("cityId") String id, @FormParam("name") String name) {
+		City existingCity = cityService.update(id, name);
+		
+		return Response.status(Status.CREATED)
+			   .entity(existingCity)
+			   .build();
 	}
 
 	@DELETE

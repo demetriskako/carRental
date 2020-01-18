@@ -4,12 +4,12 @@
  	<%@include file="../partials/navigation.html" %>
 	
 	 <div class="container">
-	 	<h2>Stores</h2>
-	 	<div class="row">
-			<a class="btn btn-primary" href="http://localhost:8080/carRental/stores/create.jsp" role="button">New Store</a>			 
-	 	</div>
-	 
+	 	<h2 class="m-2">Stores</h2>
 	 	<div class="content">
+		 	<div class="row mb-2">
+				<a class="btn btn-primary" href="http://localhost:8080/carRental/stores/create.jsp" role="button">New Store</a>			 
+		 	</div>
+	 
 	 		<div class="row">
 	 	 		<div class="col-md-12">
 					<div class="profile">

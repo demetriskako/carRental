@@ -16,5 +16,7 @@
         <mapping class="org.dkak.carRental.models.City"/>
 		<mapping class="org.dkak.carRental.models.Vehicle"/>
 		<mapping class="org.dkak.carRental.models.Store"/>
+		<mapping class="org.dkak.carRental.models.Client"/>
+		
     </session-factory>
 </hibernate-configuration>

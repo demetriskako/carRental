@@ -14,5 +14,7 @@
         <property name="show_sql">true</property>
      
         <mapping class="org.dkak.carRental.models.City"/>
+		<mapping class="org.dkak.carRental.models.Vehicle"/>
+		<mapping class="org.dkak.carRental.models.Store"/>
     </session-factory>
 </hibernate-configuration>

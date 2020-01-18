@@ -3,9 +3,7 @@
  <body>
  	<%@include file="../partials/navigation.html" %>
 	
-	 <div class="container">
-	 
-	 	
+	 <div class="container-fluid">
 	 </div>
 </body>
 

@@ -3,7 +3,6 @@
 	<%@include file="../partials/navigation.html" %>
 	
 	<body>
-	
 		<div class="container">
 	       	<div class="row p-4">
 				<h2>Create City</h2>

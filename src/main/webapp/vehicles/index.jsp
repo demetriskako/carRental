@@ -4,23 +4,27 @@
  	<%@include file="../partials/navigation.html" %>
 	
 	 <div class="container">
-	 	<h2>Vehicles</h2>
 	 	<div class="content">
-			<div class="row">
-				<a class="btn btn-primary" href="http://localhost:8080/carRental/vehicles/create.jsp" role="button">Add New Vehicle</a>			 
-			</div>
+			<div class="row p-4">
+		 		<div class="col-md-10">
+		 			<h2>Vehicles</h2>
+		 		</div>
+		 		
+		 		<div class="row mb-2">
+					<a class="btn btn-primary" href="http://localhost:8080/carRental/vehicles/create.jsp" role="button">Add New Vehicle</a>			 
+		 		</div>			 
+	 		</div>
 	 
 		 	<div class="row">
 		 	 	<div class="col-md-12">
 					<div class="profile">
 				 	<table id="userdata" class="table">
 				 		<thead>
-					        <th>Licence No</th>
+					        <th>Licence</th>
 					        <th>Model</th>
 					        <th>Fuel</th>
 					        <th>Type</th>
 					        <th>Model</th>
-					        <th>Capacity</th>
 					        <th>Cost per Day</th>
 					        <th style="width: 20%">Actions</th>
 				   	 	</thead>
@@ -42,16 +46,14 @@
 			    $.each(data, function(f) {
 			    	console.log();
 			     	var tblRow = "<tr>" 
-			     	+ "<td>" + data[f].vehicleLicenceNo + "</td>" + "<td>" + data[f].vehicleModel + "</td>"
-			     	+ "<td>" + data[f].vehicleFuel+ "</td>" + "<td>" + data[f].vehicleType + "</td>" 
-			     	+ "<td>" + data[f].vehicleModel+ "</td>" + "<td>" + data[f].vehicleCapacity + "</td>" 
-			     	+ "<td>" + data[f].vehicleRentalCost+ "</td>"
+			     	+ "<td>" + data[f].licence + "</td>" + "<td>" + data[f].model + "</td>"
+			     	+ "<td>" + data[f].fuel + "</td>" + "<td>" + data[f].type + "</td>" 
+			     	+ "<td>" + data[f].model + "</td>" + "<td>" + data[f].cost + "</td>"
 	      		    + "<td>"
-			     	+ "<a type='button' href='http://localhost:8080/carRental/cities/update.jsp?id="  + data[f].id + "' class='btn btn-primary'>"
+			     	+ "<a type='button' href='http://localhost:8080/carRental/vehicles/update.jsp?id="  + data[f].licence + "' class='btn btn-primary mr-2'>"
 			     	+  	"Edit"
 			     	+ "</a>"
-	      		    + "<nbsp>" 
-	                + "<button id='deleteButton"+ data[f].vehicleLicenceNo + "' class='btn btn-danger'> Delete </button></td></tr>";
+	                + "<button id='deleteButton"+ data[f].licence + "' class='btn btn-danger'> Delete </button></td></tr>";
 			               
 			      	$(tblRow).appendTo("#userdata tbody");
 			      	

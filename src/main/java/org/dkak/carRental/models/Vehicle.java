@@ -1,169 +1,108 @@
 package org.dkak.carRental.models;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.DiscriminatorType;
 import javax.ws.rs.Path;
 
 @Entity
-@Table(name = "vehicle")
 @Path("vehicle")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="VEHICLE_TYPE", 
+  discriminatorType = DiscriminatorType.STRING)
+
 public class Vehicle {
 	
 	@Id
 	@Column(name="VEHICLE_LICENCE_NO")
-	private String vehicleLicenceNo;
-	@Column(name="STORE_ID")
-	private String storeId;
+	private String licence;
 	@Column(name="VEHICLE_MODEL")
-	private String vehicleModel;
+	private String model;
 	@Column(name="VEHICLE_FUEL")
-	private String vehicleFuel;
+	private String fuel;
 	@Column(name="VEHICLE_CAPACITY")
-	private String vehicleCapacity;
+	private String capacity;
 	@Column(name="VEHICLE_RENTAL_COST")
-	private String vehicleRentalCost;
-	@Column(name="VEHICLE_TYPE")
-	private String vehicleType;
-	@Column(name="VEHICLE_SEAT_HEIGHT")
-	private String vehicleSeatHeight;
-	@Column(name="VEHICLE_LUGGAGE_SUPPORT")
-	private String vehicleLuggageSupport;
-	@Column(name="VEHICLE_SEAT_NO")
-	private String vehicleSeatNo;
-	@Column(name="VEHICLE_DOOR_NUMBER")
-	private String vehicleDoorNumber;
-	@Column(name="CITY_ID")
-	private String cityId;
-	@Column(name="CITY_NAME")
-	private String cityName;
+	private int cost;
+	@Column(name="VEHICLE_TYPE", insertable=false, updatable = false, nullable = false)
+	private String type;
+	@ManyToOne
+    @JoinColumn(name="STORE_ID", nullable=false)
+    private Store store;
 	
 	public Vehicle() {
-		super();
-	}
-	
-	public Vehicle(String vehicleLicenceNo, String storeId, String vehicleModel, String vehicleFuel,
-			String vehicleCapacity, String vehicleRentalCost, String vehicleType, String vehicleSeatHeight,
-			String vehicleLuggageSupport, String vehicleSeatNo, String vehicleDoorNumber, String cityId,
-			String cityName) {
-		super();
-		this.vehicleLicenceNo = vehicleLicenceNo;
-		this.storeId = storeId;
-		this.vehicleModel = vehicleModel;
-		this.vehicleFuel = vehicleFuel;
-		this.vehicleCapacity = vehicleCapacity;
-		this.vehicleRentalCost = vehicleRentalCost;
-		this.vehicleType = vehicleType;
-		this.vehicleSeatHeight = vehicleSeatHeight;
-		this.vehicleLuggageSupport = vehicleLuggageSupport;
-		this.vehicleSeatNo = vehicleSeatNo;
-		this.vehicleDoorNumber = vehicleDoorNumber;
-		this.cityId = cityId;
-		this.cityName = cityName;
+
 	}
 
-	public String getVehicleLicenceNo() {
-		return vehicleLicenceNo;
+	public Vehicle(String licence, String model, String fuel, String capacity, int cost, String type, Store store) {
+		this.licence = licence;
+		this.model = model;
+		this.fuel = fuel;
+		this.capacity = capacity;
+		this.cost = cost;
+		this.type = type;
+		this.store = store;
 	}
 
-	public void setVehicleLicenceNo(String vehicleLicenceNo) {
-		this.vehicleLicenceNo = vehicleLicenceNo;
+	public Store getStore() {
+		return store;
 	}
 
-	public String getStoreId() {
-		return storeId;
+	public void setStore(Store store) {
+		this.store = store;
 	}
 
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
+	public String getLicence() {
+		return licence;
 	}
 
-	public String getVehicleModel() {
-		return vehicleModel;
+	public void setLicence(String licence) {
+		this.licence = licence;
 	}
 
-	public void setVehicleModel(String vehicleModel) {
-		this.vehicleModel = vehicleModel;
+	public String getModel() {
+		return model;
 	}
 
-	public String getVehicleFuel() {
-		return vehicleFuel;
+	public void setModel(String model) {
+		this.model = model;
 	}
 
-	public void setVehicleFuel(String vehicleFuel) {
-		this.vehicleFuel = vehicleFuel;
+	public String getFuel() {
+		return fuel;
 	}
 
-	public String getVehicleCapacity() {
-		return vehicleCapacity;
+	public void setFuel(String fuel) {
+		this.fuel = fuel;
 	}
 
-	public void setVehicleCapacity(String vehicleCapacity) {
-		this.vehicleCapacity = vehicleCapacity;
+	public String getCapacity() {
+		return capacity;
 	}
 
-	public String getVehicleRentalCost() {
-		return vehicleRentalCost;
+	public void setCapacity(String capacity) {
+		this.capacity = capacity;
 	}
 
-	public void setVehicleRentalCost(String vehicleRentalCost) {
-		this.vehicleRentalCost = vehicleRentalCost;
+	public int getCost() {
+		return cost;
 	}
 
-	public String getVehicleType() {
-		return vehicleType;
+	public void setCost(int cost) {
+		this.cost = cost;
 	}
 
-	public void setVehicleType(String vehicleType) {
-		this.vehicleType = vehicleType;
+	public String getType() {
+		return type;
 	}
 
-	public String getVehicleSeatHeight() {
-		return vehicleSeatHeight;
+	public void setType(String type) {
+		this.type = type;
 	}
-
-	public void setVehicleSeatHeight(String vehicleSeatHeight) {
-		this.vehicleSeatHeight = vehicleSeatHeight;
-	}
-
-	public String getVehicleLuggageSupport() {
-		return vehicleLuggageSupport;
-	}
-
-	public void setVehicleLuggageSupport(String vehicleLuggageSupport) {
-		this.vehicleLuggageSupport = vehicleLuggageSupport;
-	}
-
-	public String getVehicleSeatNo() {
-		return vehicleSeatNo;
-	}
-
-	public void setVehicleSeatNo(String vehicleSeatNo) {
-		this.vehicleSeatNo = vehicleSeatNo;
-	}
-
-	public String getVehicleDoorNumber() {
-		return vehicleDoorNumber;
-	}
-
-	public void setVehicleDoorNumber(String vehicleDoorNumber) {
-		this.vehicleDoorNumber = vehicleDoorNumber;
-	}
-
-	public String getCityId() {
-		return cityId;
-	}
-
-	public void setCityId(String cityId) {
-		this.cityId = cityId;
-	}
-
-	public String getCityName() {
-		return cityName;
-	}
-
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}	
 }

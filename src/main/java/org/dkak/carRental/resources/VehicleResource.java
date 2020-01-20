@@ -15,40 +15,56 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.dkak.carRental.models.City;
+import org.dkak.carRental.models.Car;
+import org.dkak.carRental.models.TwoWheeled;
 import org.dkak.carRental.models.Vehicle;
-import org.dkak.carRental.services.CityService;
+import org.dkak.carRental.services.CarService;
+import org.dkak.carRental.services.TwoWheeledService;
 import org.dkak.carRental.services.VehicleService;
 
 @Path("/vehicles")
 public class VehicleResource {
 	
+	TwoWheeledService twoWheeledService = new TwoWheeledService();
+	CarService carService = new CarService();
 	VehicleService vehicleService = new VehicleService();
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Vehicle> index() {
-		return vehicleService.getAllCities();
+		return vehicleService.getAll();
 	}
 	
 //	@GET
-//	@Path("/{cityId}")
+//	@Path("/{id}")
 //	@Produces(MediaType.APPLICATION_JSON)
-//	public City findById(@PathParam("cityId") String id) {
-//		return cityService.getCity(id);
+//	public Vehicle findById(@PathParam("id") String id) {
+//		return vehicleService.show(id);
 //	}
-//	
-//	@POST
-//	@Path("/create")
-//	@Consumes("application/x-www-form-urlencoded")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response create(@FormParam("id") String id, @FormParam("name") String name) {
-//		City newCity = cityService.add(id, name);
-//		
-//		return Response.status(Status.CREATED)
-//				   .entity(newCity)
-//				   .build();	
-//	}
+	
+	@POST
+	@Path("/create")
+	@Consumes("application/x-www-form-urlencoded")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response create(@FormParam("licence") String licence, @FormParam("type") String type, @FormParam("model") String model,
+			@FormParam("fuel") String fuel, @FormParam("cost") int cost, @FormParam("capacity") String capacity, @FormParam("store") String store,
+			@FormParam("doors") int doors, @FormParam("seats") int seats,
+			@FormParam("seatHeight") int seatHeight, @FormParam("luggage") String luggage) {
+			
+		if(type == "Car") {
+			Car car = carService.add(licence, type, model, fuel, cost, capacity, store, doors, seats);
+			
+			return Response.status(Status.CREATED)
+					.entity(car)
+					.build();	
+		}else {
+			TwoWheeled twoWheeled = twoWheeledService.add(licence, type, model, fuel, cost, capacity, store, seatHeight, luggage);
+			
+			return Response.status(Status.CREATED)
+					.entity(twoWheeled)
+					.build();	
+		}	
+	}
 //	
 //	@PUT 
 //	@Path("/{cityId}")

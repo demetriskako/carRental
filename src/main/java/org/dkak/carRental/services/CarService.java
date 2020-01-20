@@ -10,68 +10,68 @@ import org.dkak.carRental.exceptions.DataNotFoundException;
 import org.dkak.carRental.exceptions.GenericException;
 import org.dkak.carRental.models.Car;
 import org.dkak.carRental.models.City;
+import org.dkak.carRental.models.Store;
 import org.dkak.carRental.models.SuccessMessage;
-import org.dkak.carRental.models.TwoWheeled;
-import org.dkak.carRental.models.Vehicle;
+import org.dkak.carRental.models.Car;
 import org.dkak.carRental.utils.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session; 
 import org.hibernate.Transaction;
 
 
-public class VehicleService {
+public class CarService {
 	
 	private Session session = null;
 	private Transaction tx = null;
 	
-	public VehicleService() {
+	public CarService() {
 		session = HibernateUtil.getSessionFactory().openSession();
 		tx = session.beginTransaction();
 	}
 	
-	public List<Vehicle> getAll() {
-		
-		List<Vehicle> vehicles = new ArrayList<>();
-		tx.commit();
-		vehicles = session.createQuery("from Vehicle", Vehicle.class).getResultList();		
-	    session.close();
-	    
-		return vehicles;
-	}
-	
-	public Vehicle show(String id) {
-		Vehicle vehicle = new Vehicle();
-		
-		vehicle = session.find(Vehicle.class, id);	
-		tx.commit();	
-		
-		if(vehicle == null) {
-			throw new DataNotFoundException("City not found");	 			
-		} 
-		
-    	session.close();
-
-		return vehicle;	    
-	}
-	
-//	public Car addCar(String licence, String type, String model, String fuel, int cost, 
-//			String capacity, int doors, int seats, String store) {
-//	
-//		Car existingCar = session.find(Car.class, licence);
+//	public List<Car> getAll() {
 //		
-//		if(existingCar == null) {
-//			System.out.print("Hello");
-//			Car car= new Car(licence, type, model, fuel, cost, capacity, store, doors, seats);
-//			session.save(car);
-//			tx.commit();	
-//			
-//	    	session.close();
-//	    	
-//			return car;
-//		}else {
-//			throw new GenericException("Duplicate Entry!");
-//		}	
+//		List<Car> Cars = new ArrayList<>();
+//		tx.commit();
+//		Cars = session.createQuery("from Car", Car.class).getResultList();		
+//	    session.close();
+//	    
+//		return Cars;
 //	}
+	
+//	public City show(String id) {
+//		City city = new City();
+//		
+//		city = session.find(City.class, id);	
+//		tx.commit();	
+//		
+//		if(city == null) {
+//			throw new DataNotFoundException("City not found");	 			
+//		} 
+//		
+//    	session.close();
+//
+//		return city;	    
+//	}
+//	
+	public Car add(String licence, String type, String model, String fuel, int cost, 
+			String capacity, String storeId, int doors, int seats) {
+	
+		Car existingCar = session.find(Car.class, licence);
+		Store store = session.find(Store.class, storeId);
+		
+		if(existingCar == null) {
+			Car car= new Car(licence, model, fuel, capacity, cost, type, store, doors, seats);
+			session.save(car);
+			tx.commit();	
+			
+	    	session.close();
+	    	
+			return car;
+		}else {
+			throw new GenericException("Duplicate Entry!");
+		}	
+	}
 	
 //	public City update(String id, String name) {
 //		try {

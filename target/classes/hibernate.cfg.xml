@@ -14,7 +14,9 @@
         <property name="show_sql">true</property>
      
         <mapping class="org.dkak.carRental.models.City"/>
-		<mapping class="org.dkak.carRental.models.Vehicle"/>
+       	<mapping class="org.dkak.carRental.models.Vehicle"/>		
+		<mapping class="org.dkak.carRental.models.Car"/>		
+		<mapping class="org.dkak.carRental.models.TwoWheeled"/>
 		<mapping class="org.dkak.carRental.models.Store"/>
 		<mapping class="org.dkak.carRental.models.Client"/>
 		

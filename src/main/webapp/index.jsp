@@ -1,12 +1,14 @@
 <html>
 	<%@include file="../partials/head.html" %>
- <body>
- 	<%@include file="../partials/navigation.html" %>
+ 
+ 	<body>
+		<%@include file="../partials/navigation.html" %>
 	
-	 <div class="container-fluid">
-	 </div>
-</body>
+	 	<div class="container-fluid">
+	 	</div>
+	</body>
 
-<script>
-</script>
+	<script>
+		
+	</script>
 </html>

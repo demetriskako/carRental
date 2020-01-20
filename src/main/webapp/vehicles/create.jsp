@@ -5,20 +5,26 @@
  	<%@include file="../partials/navigation.html" %>
 	
 	 <div class="container">
-        <h2> Create New Vehicle </h2>	   
+	 	<div class="row p-4">
+        	<h2>Create Vehicle</h2>	   
+		</div>	
         
         <div class="row">	
         	<div class="col-md-6">
 		        <div class="form-group">
-			       	<label for="vehicleLicenceNo">License Number</label>
-			       	<input type="text" class="form-control" id="vehicleLicenceNo">	
+			       	<label for="license">License Number</label>
+			       	<input type="text" class="form-control" id="license">	
 		        </div>
 	        </div>
 	        
-	       <div class="col-md-6">
+	        <div class="col-md-6">
 		       <div class="form-group">
-			       	<label for="storeId">Store ID</label>
-			       	<input type="text" class="form-control" id="storeId">	
+			       	<label for="type">Vehicle Type</label>
+			       	<select class="form-control" id="type">
+			       		<option disabled selected>Please Select</option>
+			       		<option>TwoWheeled</option>
+			       		<option>Car</option>
+					</select>
 		        </div>
 	        </div>
         </div>     
@@ -26,15 +32,19 @@
         <div class="row">	
         	<div class="col-md-6">
 		        <div class="form-group">
-			       	<label for="vehicleModel">Vehicle Model</label>
-			       	<input type="text" class="form-control" id="vehicleModel">	
+			       	<label for="model">Vehicle Model</label>
+			       	<input type="text" class="form-control" id="model">	
 		        </div>
 	        </div>
 	        
 	       <div class="col-md-6">
 		       <div class="form-group">
-			       	<label for="storeId">Vehicle Fuel</label>
-			       	<input type="text" class="form-control" id="vehicleFuel">	
+			       	<label for="fuel">Vehicle Fuel</label>
+			       	<select class="form-control" id="fuel">
+			       		<option disabled selected>Please Select</option>
+			       		<option>Gas</option>
+			       		<option>Petrol</option>
+					</select>
 		        </div>
 	        </div>
         </div>     
@@ -42,15 +52,15 @@
         <div class="row">	
         	<div class="col-md-6">
 		        <div class="form-group">
-			       	<label for="vehicleCapacity">Vehicle Capacity</label>
-			       	<input type="text" class="form-control" id="vehicleCapacity">	
+			       	<label for="capacity">Vehicle Capacity</label>
+			       	<input type="number" class="form-control" id="capacity">	
 		        </div>
 	        </div>
 	        
 	       <div class="col-md-6">
 		       <div class="form-group">
-			       	<label for="vehicleRentalCost">Vehicle Rental Cost</label>
-			       	<input type="text" class="form-control" id="vehicleRentalCost">	
+			       	<label for="cost">Rental Cost</label>
+			       	<input type="number" min="0" class="form-control" id="cost" placeholder="Euros/Day">	
 		        </div>
 	        </div>
         </div>    
@@ -58,31 +68,19 @@
         <div class="row">	
         	<div class="col-md-6">
 		        <div class="form-group">
-			       	<label for="vehicleModel">Vehicle Capacity</label>
-			       	<input type="text" class="form-control" id="vehicleModel">	
+			       	<label for="seatHeight">Vehicle Seat Height</label>
+			       	<input type="number" min="0" class="form-control" id="seatHeight" placeholder="(cm)">	
 		        </div>
 	        </div>
 	        
 	       <div class="col-md-6">
 		       <div class="form-group">
-			       	<label for="vehicleType">Vehicle Type</label>
-			       	<input type="text" class="form-control" id="vehicleType">	
-		        </div>
-	        </div>
-        </div>    
-        
-        <div class="row">	
-        	<div class="col-md-6">
-		        <div class="form-group">
-			       	<label for="vehicleSeatHeight">Vehicle Seat Height</label>
-			       	<input type="text" class="form-control" id="vehicleSeatHeight">	
-		        </div>
-	        </div>
-	        
-	       <div class="col-md-6">
-		       <div class="form-group">
-			       	<label for="vehicleLuggageSupport">Vehicle Luggage Support</label>
-			       	<input type="text" class="form-control" id="vehicleLuggageSupport">	
+			       	<label for="luggage">Vehicle Luggage Support</label>
+			        <select class="form-control" id="luggage">
+			        	<option disabled selected>Please Select</option>
+			       		<option>Yes</option>
+			       		<option>No</option>
+					</select>
 		        </div>
 	        </div>
         </div>  
@@ -90,36 +88,65 @@
         <div class="row">	
         	<div class="col-md-6">
 		        <div class="form-group">
-			       	<label for="vehicleSeatNo">Vehicle Seat No</label>
-			       	<input type="text" class="form-control" id="vehicleSeatNo">	
+			       	<label for="seats">Vehicle Seat No</label>
+			       	<input type="number" min="1" class="form-control" id="seats">	
 		        </div>
 	        </div>
 	        
 	      <div class="col-md-6">
 		      <div class="form-group">
-			       	<label for="vehicleDoorNumber">Vehicle Door No</label>
-			       	<input type="text" class="form-control" id="vehicleDoorNumber">	
+			       	<label for="doors">Vehicle Door No</label>
+			       	<input type="number" min="1" class="form-control" id="doors">	
 		        </div>
 	        </div>
         </div>    
         
-         
+          
         <div class="row">	
         	<div class="col-md-6">
 		        <div class="form-group">
-			       	<label for="cityId">City</label>
-			       	<input type="text" class="form-control" id="cityId">	
+			       	<label for="store">Store</label>
+			       	<input type="text" class="form-control" id="store" value="St1">	
 		        </div>
-	       </div>
-        </div>    
-               
-        <button id="updateButton" class="btn btn-primary">Save</button>
+	        </div>
+        </div>   
+              
+        <button id="saveButton" class="btn btn-primary">Save</button>
 		<a href="http://localhost:8080/carRental/vehicles/" class="btn btn-danger">Back</a>      
 	 </div>
 	</body>
 
  <script>
-
+ $(document).ready(function($){  
+	 
+ 	 $("#saveButton").on("click", function(){
+ 		$.ajax({
+ 			url: "http://localhost:8080/carRental/webapi/vehicles/create",
+ 			type: "POST",
+ 			dataType: 'json',
+ 			contentType: 'application/x-www-form-urlencoded',
+ 			data: {
+ 				"licence": $('#license').val(),
+ 				"model": $('#model').val(),
+ 				"vehicle_type": $('#type').val(),
+ 				"fuel": $('#fuel').val(),
+ 				"capacity": $('#capacity').val(),
+ 				"cost": $('#cost').val(),
+ 				"seats": $('#seats').val(),
+ 				"doors": $('#doors').val(),
+ 				"seatHeight": $('#seatHeight').val(),
+ 				"luggage": $('#luggage').val(),
+ 				"store": "St1",
+ 			},
+ 			success: function(data){
+ 				window.location.replace('http://localhost:8080/carRental/vehicles');
+ 			},
+ 			error: function(data) { 
+ 		        alert("There was an Error!"); 
+ 		    }  
+ 		});
+	 });   
+});
 	
 </script>   
 </html>

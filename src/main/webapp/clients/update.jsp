@@ -99,7 +99,10 @@
 	      			},
 	      			success: function(data){
 		 				window.location.replace('http://localhost:8080/carRental/clients');
-	      			}
+	      			},
+	      			error: function(data) { 
+		 		        alert("There was an Error!"); 
+		 		    }   
 	      		});
 			 });   
 		 });

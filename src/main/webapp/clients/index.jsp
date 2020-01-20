@@ -61,11 +61,15 @@
 			      			type: "delete",
 			      			success : function(data){
 			      				location.reload();
-			      			}
+			      			},
+			      			error: function(data) { 
+				 		        alert("There was an Error!"); 
+				 		    }   
 			      		});
 					 });
 			   	});
-			  });
+			  })
+			  .error(function() { alert("Database Error"); });
 		 });
 	 });
 </script>

@@ -17,8 +17,8 @@ public class TwoWheeled extends Vehicle {
 
 	}
 
-	public TwoWheeled(String license, String model, String fuel, String capacity, int cost, String type, Store store, int seatHeight, String luggage) {
-		super(license, model, fuel, capacity, cost, type, store);
+	public TwoWheeled(String license, String model, String fuel, String capacity, int cost, String type, String vehicle_type, Store store, int seatHeight, String luggage) {
+		super(license, model, fuel, capacity, cost, type, vehicle_type, store);
 		
 		this.seatHeight = seatHeight;
 		this.luggage = luggage;

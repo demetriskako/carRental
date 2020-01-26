@@ -14,7 +14,7 @@ import javax.ws.rs.Path;
 @Entity
 @Path("vehicle")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="VEHICLE_TYPE", 
+@DiscriminatorColumn(name="TYPE",
   discriminatorType = DiscriminatorType.STRING)
 
 public class Vehicle {
@@ -30,7 +30,9 @@ public class Vehicle {
 	private String capacity;
 	@Column(name="VEHICLE_RENTAL_COST")
 	private int cost;
-	@Column(name="VEHICLE_TYPE", insertable=false, updatable = false, nullable = false)
+	@Column(name="VEHICLE_TYPE")
+	private String vehicle_type;
+	@Column(name="TYPE", insertable=false, updatable = false, nullable = false)
 	private String type;
 	@ManyToOne
     @JoinColumn(name="STORE_ID", nullable=false)
@@ -40,13 +42,14 @@ public class Vehicle {
 
 	}
 
-	public Vehicle(String licence, String model, String fuel, String capacity, int cost, String type, Store store) {
+	public Vehicle(String licence, String model, String fuel, String capacity, int cost, String type, String vehicle_type, Store store) {
 		this.licence = licence;
 		this.model = model;
 		this.fuel = fuel;
 		this.capacity = capacity;
 		this.cost = cost;
 		this.type = type;
+		this.vehicle_type = vehicle_type;
 		this.store = store;
 	}
 
@@ -88,6 +91,14 @@ public class Vehicle {
 
 	public void setCapacity(String capacity) {
 		this.capacity = capacity;
+	}
+
+	public void setVehicle_type(String vehicle_type) {
+		this.vehicle_type = vehicle_type;
+	}
+
+	public String getVehicle_type() {
+		return vehicle_type;
 	}
 
 	public int getCost() {

@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-
 @Entity
 @DiscriminatorValue("Car")
 public class Car extends Vehicle {
@@ -16,8 +15,8 @@ public class Car extends Vehicle {
 	public Car() {
 	}
 
-	public Car(String license, String model, String fuel, String capacity, int cost, String type, Store store, Integer seats, Integer doors) {
-		super(license, model, fuel, capacity, cost, type, store);
+	public Car(String license, String model, String fuel, String capacity, int cost, String type, String vehicle_type, Store store, Integer seats, Integer doors) {
+		super(license, model, fuel, capacity, cost, type, vehicle_type, store);
 		this.seats = seats;
 		this.doors = doors;
 	}

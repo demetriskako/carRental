@@ -1,6 +1,5 @@
 package org.dkak.carRental.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.core.Response;
@@ -27,28 +26,26 @@ public class ClientService {
 	}
 	
 	public List<Client> getAll() {
-		
-		List<Client> clients = new ArrayList<>();
+
 		tx.commit();
-		clients = session.createQuery("from Client", Client.class).getResultList();		
+		List<Client> clients = session.createQuery("from Client", Client.class).getResultList();
 	    session.close();
 	    
 		return clients;
 	}
 	
 	public Client show(String id) {
-		Client Client = new Client();
 		
-		Client = session.find(Client.class, id);	
+		Client client = session.find(Client.class, id);
 		tx.commit();	
 		
-		if(Client == null) {
+		if(client == null) {
 			throw new DataNotFoundException("Client not found");	 			
 		} 
 		
     	session.close();
 
-		return Client;	    
+		return client;
 	}
 	
 	public Client create(String id, String name, String surname, String licence, String email, String tel, String address) {
@@ -63,9 +60,13 @@ public class ClientService {
 	    	session.close();
 
 			return client;
+
 		}else {
+
+			session.close();
+
 			throw new GenericException("Duplicate Entry!");
-		}	
+		}
 	}
 	
 	public Client update(String id, String newId, String name, String surname, String licence, String email, String tel, String address) {
@@ -87,7 +88,9 @@ public class ClientService {
 			session.update(existingClient); 
 			
 		    tx.commit();
+
 			return existingClient;
+
 		} catch (HibernateException e) {
 			throw new GenericException("Unkown Error");
 		} finally {
@@ -104,11 +107,15 @@ public class ClientService {
 			}
 			
 			session.delete(currentClient);
-			tx.commit();	
+
+			tx.commit();
+
 			SuccessMessage successMessage = new SuccessMessage("Client deleted succesfully");
+
 			return Response.status(Status.OK)
 					.entity(successMessage)
-					.build(); 
+					.build();
+
 		} catch (Throwable e) { 
 			throw new GenericException("Unkown Error");
 	    }  finally {

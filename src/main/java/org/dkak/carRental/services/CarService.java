@@ -23,45 +23,21 @@ public class CarService {
 	
 	private Session session = null;
 	private Transaction tx = null;
+	private static String type = "Car";
 	
 	public CarService() {
 		session = HibernateUtil.getSessionFactory().openSession();
 		tx = session.beginTransaction();
 	}
-	
-//	public List<Car> getAll() {
-//		
-//		List<Car> Cars = new ArrayList<>();
-//		tx.commit();
-//		Cars = session.createQuery("from Car", Car.class).getResultList();		
-//	    session.close();
-//	    
-//		return Cars;
-//	}
-	
-//	public City show(String id) {
-//		City city = new City();
-//		
-//		city = session.find(City.class, id);	
-//		tx.commit();	
-//		
-//		if(city == null) {
-//			throw new DataNotFoundException("City not found");	 			
-//		} 
-//		
-//    	session.close();
-//
-//		return city;	    
-//	}
-//	
-	public Car add(String licence, String type, String model, String fuel, int cost, 
+
+	public Car add(String licence, String vehicle_type, String model, String fuel, int cost,
 			String capacity, String storeId, int doors, int seats) {
 	
 		Car existingCar = session.find(Car.class, licence);
 		Store store = session.find(Store.class, storeId);
 		
 		if(existingCar == null) {
-			Car car= new Car(licence, model, fuel, capacity, cost, type, store, doors, seats);
+			Car car= new Car(licence, model, fuel, capacity, cost, type, vehicle_type, store, doors, seats);
 			session.save(car);
 			tx.commit();	
 			
@@ -69,6 +45,8 @@ public class CarService {
 	    	
 			return car;
 		}else {
+			session.close();
+
 			throw new GenericException("Duplicate Entry!");
 		}	
 	}
@@ -93,25 +71,5 @@ public class CarService {
 //			session.close(); 
 //		}	  
 //	}
-//	
-//	public Response remove(String id) {	
-//		try {
-//			City currentCity = session.find(City.class, id);
-//			
-//			if(currentCity == null) {
-//				throw new DataNotFoundException("City not found");	 			
-//			}
-//			
-//			session.delete(currentCity);
-//			tx.commit();	
-//			SuccessMessage successMessage = new SuccessMessage("City deleted succesfully");
-//			return Response.status(Status.OK)
-//					.entity(successMessage)
-//					.build(); 
-//		} catch (Throwable e) { 
-//			throw new GenericException("Unkown Error");
-//	    }  finally {
-//	    	 session.close();
-//	    }				
-//	}
+
 }

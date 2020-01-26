@@ -1,6 +1,5 @@
 package org.dkak.carRental.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.core.Response;
@@ -27,26 +26,22 @@ public class CityService {
 	}
 	
 	public List<City> getAllCities() {
-		
-		List<City> cities = new ArrayList<>();
+
+		List<City> cities = session.createQuery("from City", City.class).getResultList();
 		tx.commit();
-		cities = session.createQuery("from City", City.class).getResultList();		
-	    session.close();
+		session.close();
 	    
 		return cities;
 	}
 	
 	public City getCity(String id) {
-		City city = new City();
-		
-		city = session.find(City.class, id);	
-		tx.commit();	
-		
+		City city = session.find(City.class, id);
+		tx.commit();
+		session.close();
+
 		if(city == null) {
 			throw new DataNotFoundException("City not found");	 			
 		} 
-		
-    	session.close();
 
 		return city;	    
 	}
@@ -64,6 +59,8 @@ public class CityService {
 
 			return city;
 		}else {
+			session.close();
+
 			throw new GenericException("Duplicate Entry!");
 		}	
 	}
@@ -73,15 +70,16 @@ public class CityService {
 			City currentCity = (City)session.get(City.class, id); 
 			 
 			if(currentCity == null) {
+				session.close();
 				throw new DataNotFoundException("City not found");	 			
 			}
 			 
 			currentCity.setName(name);
-			 
-			session.update(currentCity); 
-			
+			session.update(currentCity);
 		    tx.commit();
+
 			return currentCity;
+
 		} catch (HibernateException e) {
 			throw new GenericException("Unkown Error");
 		} finally {
@@ -92,9 +90,11 @@ public class CityService {
 	public Response remove(String id) {	
 		try {
 			City currentCity = session.find(City.class, id);
-			
+
 			if(currentCity == null) {
-				throw new DataNotFoundException("City not found");	 			
+				session.close();
+
+				throw new DataNotFoundException("City not found");
 			}
 			
 			session.delete(currentCity);

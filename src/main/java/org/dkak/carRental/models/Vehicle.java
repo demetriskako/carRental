@@ -16,7 +16,6 @@ import javax.ws.rs.Path;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="TYPE",
   discriminatorType = DiscriminatorType.STRING)
-
 public class Vehicle {
 	
 	@Id

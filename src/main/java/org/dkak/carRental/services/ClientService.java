@@ -21,7 +21,7 @@ public class ClientService {
 	private Transaction tx = null;
 	
 	public ClientService() {
-		session = HibernateUtil.getSessionFactory().openSession();
+		session = HibernateUtil.getSessionFactory();
 		tx = session.beginTransaction();
 	}
 	

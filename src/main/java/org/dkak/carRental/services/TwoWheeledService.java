@@ -28,50 +28,69 @@ public class TwoWheeledService {
 
 
 	public TwoWheeledService() {
-		session = HibernateUtil.getSessionFactory().openSession();
+		session = HibernateUtil.getSessionFactory();
 		tx = session.beginTransaction();
 	}
 
 	public TwoWheeled add(String licence, String vehicle_type, String model, String fuel, int cost,
 			String capacity, String storeId, int seatHeight, String luggage) {
-	
+
 		TwoWheeled existingTwoWheeled = session.find(TwoWheeled.class, licence);
 		Store store = session.find(Store.class, storeId);
-		
-		if(existingTwoWheeled == null) {
-			TwoWheeled twoWheeled= new TwoWheeled(licence, model, fuel, capacity, cost, type, vehicle_type, store, seatHeight, luggage);
-			session.save(twoWheeled);
-			tx.commit();	
-			
-	    	session.close();
-	    	
-			return twoWheeled;
-		}else {
-			session.close();
 
-			throw new GenericException("Duplicate Entry!");
-		}	
+		try {
+			if (existingTwoWheeled == null) {
+				TwoWheeled twoWheeled = new TwoWheeled(licence, model, fuel, capacity, cost, type, vehicle_type, store, seatHeight, luggage);
+				session.save(twoWheeled);
+				tx.commit();
+				session.close();
+
+				return twoWheeled;
+			} else {
+				session.close();
+				throw new GenericException("Duplicate Entry!");
+			}
+		}catch (HibernateException e) {
+			throw new GenericException("Unknown Error");
+		} finally {
+			session.close();
+		}
 	}
 	
-//	public City update(String id, String name) {
-//		try {
-//			City currentCity = (City)session.get(City.class, id); 
-//			 
-//			if(currentCity == null) {
-//				throw new DataNotFoundException("City not found");	 			
-//			}
-//			 
-//			currentCity.setName(name);
-//			 
-//			session.update(currentCity); 
-//			
-//		    tx.commit();
-//			return currentCity;
-//		} catch (HibernateException e) {
-//			throw new GenericException("Unkown Error");
-//		} finally {
-//			session.close(); 
-//		}	  
-//	}
+	public TwoWheeled update(String licence, String vehicle_type, String model, String fuel, int cost,
+					   String capacity, String storeId, int seatHeight, String luggage) {
+
+		try {
+			TwoWheeled existingMoto = session.find(TwoWheeled.class, licence);
+			Store store = session.find(Store.class, storeId);
+
+			if (existingMoto != null) {
+				existingMoto.setLicence(licence);
+				existingMoto.setVehicle_type(vehicle_type);
+				existingMoto.setModel(model);
+				existingMoto.setFuel(fuel);
+				existingMoto.setCost(cost);
+				existingMoto.setCapacity(capacity);
+				existingMoto.setStore(store);
+				existingMoto.setLuggage(luggage);
+				existingMoto.setSeatHeight(seatHeight);
+
+				session.update(existingMoto);
+				tx.commit();
+				session.close();
+
+				return existingMoto;
+			} else {
+				session.close();
+				throw new DataNotFoundException("Moto did not exist!");
+			}
+
+		}catch (HibernateException e) {
+			session.close();
+			throw new GenericException("Unknown Error");
+		} finally {
+			session.close();
+		}
+	}
 
 }

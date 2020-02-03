@@ -1,5 +1,6 @@
 package org.dkak.carRental.resources;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -17,11 +18,13 @@ import javax.ws.rs.core.Response.Status;
 
 import org.dkak.carRental.exceptions.GenericException;
 import org.dkak.carRental.models.Car;
+import org.dkak.carRental.models.City;
 import org.dkak.carRental.models.TwoWheeled;
 import org.dkak.carRental.models.Vehicle;
 import org.dkak.carRental.services.CarService;
 import org.dkak.carRental.services.TwoWheeledService;
 import org.dkak.carRental.services.VehicleService;
+import org.hibernate.HibernateException;
 
 @Path("/vehicles")
 public class VehicleResource {
@@ -69,19 +72,45 @@ public class VehicleResource {
 
 		throw new GenericException("Duplicate Entry!");
 	}
-//	
-//	@PUT 
-//	@Path("/{cityId}")
-//	@Consumes("application/x-www-form-urlencoded")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response update(@PathParam("cityId") String id, @FormParam("name") String name) {
-//		City existingCity = cityService.update(id, name);
-//		
-//		return Response.status(Status.CREATED)
-//			   .entity(existingCity)
-//			   .build();
-//	}
-//
+
+	@POST
+	@Path("/search")
+	@Consumes("application/x-www-form-urlencoded")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Vehicle> search(@FormParam("vehicle_type") String vehicle_type, @FormParam("delivery_place") String delivery_place,
+	 				@FormParam("delivery_date") String delivery_date, @FormParam("return_place") String return_place,
+					@FormParam("return_date") String return_date,  @FormParam("cost") int cost) {
+
+		return vehicleService.search(vehicle_type, delivery_place, delivery_date, return_place, return_date, cost);
+	}
+
+	@PUT
+	@Path("/{id}")
+	@Consumes("application/x-www-form-urlencoded")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response update(@FormParam("licence") String licence, @FormParam("vehicle_type") String vehicle_type,
+						   @FormParam("model") String model, @FormParam("fuel") String fuel, @FormParam("cost") int cost, @FormParam("capacity") String capacity, @FormParam("store") String store,
+						   @FormParam("doors") int doors, @FormParam("seats") int seats,
+						   @FormParam("seatHeight") int seatHeight, @FormParam("luggage") String luggage) {
+
+		if (vehicle_type.equals("Small Car") || vehicle_type.equals("Medium Car") || vehicle_type.equals("Big Car")) {
+			Car existingCar = carService.update(licence, vehicle_type, model, fuel, cost, capacity, store, doors, seats);
+
+			return Response.status(Status.CREATED)
+					.entity(existingCar)
+					.build();
+
+		} else if (vehicle_type.equals("Scooter") || vehicle_type.equals("Motorcycle")) {
+			TwoWheeled existingTwoWheeled = twoWheeledService.update(licence, vehicle_type, model, fuel, cost, capacity, store, seatHeight, luggage);
+
+			return Response.status(Status.CREATED)
+					.entity(existingTwoWheeled)
+					.build();
+		}
+
+		throw new GenericException("Unknown Error");
+	}
+
 	@DELETE
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)

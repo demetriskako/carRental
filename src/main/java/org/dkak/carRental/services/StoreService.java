@@ -23,7 +23,7 @@ public class StoreService {
 	private Transaction tx = null;
 	
 	public StoreService() {
-		session = HibernateUtil.getSessionFactory().openSession();
+		session = HibernateUtil.getSessionFactory();
 		tx = session.beginTransaction();
 	}
 	

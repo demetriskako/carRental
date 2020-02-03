@@ -7,9 +7,9 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.connection.password"/>
         <property name="hibernate.connection.url">jdbc:mysql://localhost/crebas</property>
-        
+<!--        <property name="connection.pool_size">100000</property>-->
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="show_sql">true</property>
      
@@ -19,6 +19,6 @@
 		<mapping class="org.dkak.carRental.models.TwoWheeled"/>
 		<mapping class="org.dkak.carRental.models.Store"/>
 		<mapping class="org.dkak.carRental.models.Client"/>
-		
+        <mapping class="org.dkak.carRental.models.Rental"/>
     </session-factory>
 </hibernate-configuration>

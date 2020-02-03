@@ -12,18 +12,21 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div class="form-group">
-				<label for="license">License Number</label>
+				<label for="licence">License Number</label>
 				<input type="text" class="form-control" id="licence">
 			</div>
 		</div>
 
 		<div class="col-md-6">
 			<div class="form-group">
-				<label for="type">Vehicle Type</label>
-				<select class="form-control" id="type">
+				<label for="vehicle_type">Vehicle Type</label>
+				<select class="form-control" id="vehicle_type">
 					<option disabled selected>Please Select</option>
-					<option>TwoWheeled</option>
-					<option>Car</option>
+					<option>Scooter</option>
+					<option>Motorcycle</option>
+					<option>Small Car</option>
+					<option>Medium Car</option>
+					<option>Big Car</option>
 				</select>
 			</div>
 		</div>
@@ -78,8 +81,6 @@
 				<label for="luggage">Vehicle Luggage Support</label>
 				<select class="form-control" id="luggage">
 					<option disabled selected>Please Select</option>
-					<option>Yes</option>
-					<option>No</option>
 				</select>
 			</div>
 		</div>
@@ -101,12 +102,12 @@
 		</div>
 	</div>
 
-
 	<div class="row">
 		<div class="col-md-6">
 			<div class="form-group">
 				<label for="store">Store</label>
-				<input type="text" class="form-control" id="store" value="St1">
+				<select class="form-control" id="store">
+				</select>
 			</div>
 		</div>
 	</div>
@@ -118,26 +119,50 @@
 
 <script>
 	$(document).ready(function($){
+		window.onload = function() {
+			$.ajax({
+				url: "http://localhost:8080/carRental/webapi/stores",
+				type: "GET",
+				success: function(data){
+					let stores = data;
+
+					stores.map( (store) => {
+						$("#store").append("<option value=" + store.id + ">" + store.name + "</option>")
+					})
+				},
+				error: function(data) {
+					alert("There was an Error!");
+				}
+			})
+		};
+
 		$.getJSON('http://localhost:8080/carRental/webapi/vehicles/<%= request.getParameter("id") %>', function(data) {
-			$("#licence").val(data.licence)
-			$("#model").val(data.model)
-			$("#capacity").val(data.capacity)
-			$("#cost").val(data.cost)
+			$("#licence").val(data.licence);
+			$("#model").val(data.model);
+			$("#capacity").val(data.capacity);
+			$("#cost").val(data.cost);
+			$("#fuel").append("<option value='" + data.fuel + "' selected>" + data.fuel + "</option>");
+			$("#vehicle_type").append("<option value='" + data.vehicle_type + "' selected>" + data.vehicle_type + "</option>");
 
-
-
+			if(data.vehicle_type === "Scooter" || data.vehicle_type === "Motorcycle"){
+				$("#luggage").append("<option value='" + data.luggage + "' selected>" + data.luggage + "</option>");
+				$("#seatHeight").val(data.seatHeight);
+			}else{
+				$("#doors").val(data.doors);
+				$("#seats").val(data.seats);
+			}
 		});
 
 		$("#updateButton").on("click", function(){
 			$.ajax({
-				url: "http://localhost:8080/carRental/webapi/vehicles/create",
-				type: "POST",
+				url: "http://localhost:8080/carRental/webapi/vehicles/<%= request.getParameter("id") %>",
+				type: "PUT",
 				dataType: 'json',
 				contentType: 'application/x-www-form-urlencoded',
 				data: {
-					"licence": $('#license').val(),
+					"licence": $('#licence').val(),
 					"model": $('#model').val(),
-					"vehicle_type": $('#type').val(),
+					"vehicle_type": $('#vehicle_type').val(),
 					"fuel": $('#fuel').val(),
 					"capacity": $('#capacity').val(),
 					"cost": $('#cost').val(),
@@ -145,7 +170,7 @@
 					"doors": $('#doors').val(),
 					"seatHeight": $('#seatHeight').val(),
 					"luggage": $('#luggage').val(),
-					"store": "St1",
+					"store": $('#store').val(),
 				},
 				success: function(data){
 					window.location.replace('http://localhost:8080/carRental/vehicles');

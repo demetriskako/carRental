@@ -21,7 +21,7 @@ public class CityService {
 	private Transaction tx = null;
 	
 	public CityService() {
-		session = HibernateUtil.getSessionFactory().openSession();
+		session = HibernateUtil.getSessionFactory();
 		tx = session.beginTransaction();
 	}
 	

@@ -126,7 +126,7 @@
 			 url: "http://localhost:8080/carRental/webapi/stores",
 			 type: "GET",
 			 success: function(data){
-				 let stores = data
+				 let stores = data;
 
 				 stores.map( (store) => {
 					 $("#store").append("<option value=" + store.id + ">" + store.name + "</option>")
@@ -155,7 +155,7 @@
  				"doors": $('#doors').val(),
  				"seatHeight": $('#seatHeight').val(),
  				"luggage": $('#luggage').val(),
- 				"store": "St1",
+ 				"store": $('#store').val(),
  			},
  			success: function(data){
  				window.location.replace('http://localhost:8080/carRental/vehicles');

@@ -26,8 +26,8 @@
 	<script>
 		 $(document).ready(function($){
 			  $.getJSON('http://localhost:8080/carRental/webapi/cities/<%= request.getParameter("id") %>', function(data) {
-				  $("#name").val(data.name)
-				  $("#id").val(data.id)
+				  $("#name").val(data.name);
+				  $("#id").val(data.id);
 			  });
 			   
 	      	 $("#updateButton").on("click", function(){

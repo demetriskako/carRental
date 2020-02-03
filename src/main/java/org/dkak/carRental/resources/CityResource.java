@@ -21,7 +21,7 @@ import org.dkak.carRental.services.CityService;
 @Path("/cities")
 public class CityResource {
 	
-	CityService cityService = new CityService();
+	private CityService cityService = new CityService();
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

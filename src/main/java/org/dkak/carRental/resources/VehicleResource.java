@@ -1,5 +1,6 @@
 package org.dkak.carRental.resources;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class VehicleResource {
 					.entity(car)
 					.build();
 
-		}else if(vehicle_type.equals("Scooter") || vehicle_type.equals("TwoWheeled")) {
+		}else if(vehicle_type.equals("Scooter") || vehicle_type.equals("Motorcycle")) {
 			TwoWheeled twoWheeled = twoWheeledService.add(licence, vehicle_type, model, fuel, cost, capacity, store, seatHeight, luggage);
 			
 			return Response.status(Status.CREATED)
@@ -79,7 +80,7 @@ public class VehicleResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Vehicle> search(@FormParam("vehicle_type") String vehicle_type, @FormParam("delivery_place") String delivery_place,
 	 				@FormParam("delivery_date") String delivery_date, @FormParam("return_place") String return_place,
-					@FormParam("return_date") String return_date,  @FormParam("cost") int cost) {
+					@FormParam("return_date") String return_date,  @FormParam("cost") int cost) throws ParseException {
 
 		return vehicleService.search(vehicle_type, delivery_place, delivery_date, return_place, return_date, cost);
 	}

@@ -1,6 +1,9 @@
 package org.dkak.carRental.services;
 
-
+import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.core.Response;
@@ -15,9 +18,6 @@ import org.dkak.carRental.models.Vehicle;
 import org.dkak.carRental.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 
 public class VehicleService {
@@ -41,26 +41,40 @@ public class VehicleService {
 		return vehicles;
 	}
 
-	public List<Vehicle> search(String vehicle_type, String delivery_place, String delivery_date, String return_place, String return_date, int cost) {
+	public List<Vehicle> search(String vehicle_type, String delivery_place, String delivery_date, String return_place, String return_date, int cost) throws ParseException {
+
+		List<Vehicle> vehicles = null;
+
 		List<Store> stores =  session.createQuery("from Store S where S.city.id = :delivery_place", Store.class)
 				.setParameter("delivery_place", delivery_place)
 				.getResultList();
 
-		List<Vehicle> vehicles = session.createQuery("from Vehicle V where V.vehicle_type = :vehicle_type " +
-                "and V.store in (:stores) and V.cost <= :cost" , Vehicle.class)
-				.setParameter("vehicle_type", vehicle_type)
-				.setParameter("stores", stores)
-                .setParameter("cost", cost)
-                .getResultList();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Date deliveryDatetime = formatter.parse(delivery_date);
+		java.sql.Date sqlDeliveryDate = new java.sql.Date(deliveryDatetime.getTime());
+//		Date returnDatetime = formatter.parse(return_date);
 
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm");
-        DateTime deliveryDatetime = formatter.parseDateTime(delivery_date);
-        DateTime returnDatetime = formatter.parseDateTime(return_date);
+		List<String> activeRents = session.createQuery("select vehicle.licence from Rental R" +
+                " where R.returnDatetime > :delivery_date", String.class)
+				.setParameter("delivery_date", sqlDeliveryDate)
+				.getResultList();
 
-//		List<Rental> rentedVehicles = session.createQuery("from Rental R" +
-//                " where R.returnDatetime < :delivery_date", Rental.class)
-//				.setParameter("delivery_date", deliveryDatetime)
-//				.getResultList();
+		if(activeRents.isEmpty()){
+			vehicles = session.createQuery("from Vehicle V where V.vehicle_type = :vehicle_type " +
+						"and V.store in (:stores) and V.cost <= :cost", Vehicle.class)
+						.setParameter("vehicle_type", vehicle_type)
+						.setParameter("stores", stores)
+						.setParameter("cost", cost)
+						.getResultList();
+		}else {
+			vehicles = session.createQuery("from Vehicle V where V.vehicle_type = :vehicle_type " +
+						"and V.store in (:stores) and V.cost <= :cost and V.id not in :activeRentals", Vehicle.class)
+						.setParameter("vehicle_type", vehicle_type)
+						.setParameter("stores", stores)
+						.setParameter("cost", cost)
+						.setParameter("activeRentals", activeRents)
+						.getResultList();
+		}
 
 		tx.commit();
 		session.close();

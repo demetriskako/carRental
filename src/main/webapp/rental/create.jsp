@@ -94,8 +94,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="client">Clients</label>
-                                <select class="form-control" id="client">
+                                <label for="existingClient">Clients</label>
+                                <select class="form-control" id="existingClient">
                                     <option selected disabled>Select Client</option>
                                 </select>
                             </div>
@@ -190,7 +190,7 @@
             type: "GET",
             success: function(data){
                 data.map( (client) => {
-                    $("#client").append("<option value=" + client.id + ">" + client.name + "</option>")
+                    $("#existingClient").append("<option value=" + client.id + ">" + client.name + "</option>")
                 })
             },
             error: function(data) {
@@ -213,7 +213,7 @@
                 "return_place": $('#return_place').val(),
                 "return_date": $('#return_date').val(),
                 "cost": $('#cost').val(),
-                "client": $('#client').val(),
+                "existingClientID": $('#existingClient').val(),
                 "name": $('#name').val(),
                 "surname": $('#surname').val(),
                 "drivingLicence": $('#drivingLicence').val(),
@@ -223,7 +223,7 @@
                 "clientID": $('#clientID').val(),
             },
             success: function(data){
-                window.location.replace('http://localhost:8080/carRental/rentals');
+                window.location.replace('http://localhost:8080/carRental/rental');
             },
             error: function(data) {
                 alert("There was an Error!");

@@ -25,10 +25,18 @@ import org.dkak.carRental.services.StoreService;
 public class RentalResource {
     private RentalService rentalService = new RentalService();
 
-    @POST
-    @Consumes("application/x-www-form-urlencoded")
+    @GET
+    @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Rental> index() {
+        return rentalService.getAll();
+    }
+
+    @POST
+    @Path("/search")
+    @Consumes("application/x-www-form-urlencoded")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Rental> search() {
         return rentalService.search();
     }
 
@@ -45,15 +53,13 @@ public class RentalResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(@FormParam("licence") String licence, @FormParam("delivery_place") String delivery_place,
                            @FormParam("delivery_date") String delivery_date, @FormParam("return_place") String return_place,
-                           @FormParam("return_date") String return_date, @FormParam("client") String client,
+                           @FormParam("return_date") String return_date, @FormParam("existingClientID") String existingClient,
                            @FormParam("cost") int cost, @FormParam("clientID") String clientID, @FormParam("name") String name, @FormParam("surname") String surname,
                            @FormParam("drivingLicense") String drivingLicense, @FormParam("email") String email,
                            @FormParam("address") String address, @FormParam("tel") String tel) throws ParseException {
 
-        //if new customer Create customer
-        //Create Rental
         Rental rental = rentalService.add(licence, delivery_place, delivery_date,
-                return_place, return_date, client, cost, clientID, name, surname, licence, email, tel, address);
+                return_place, return_date, existingClient, cost, clientID, name, surname, licence, email, tel, address);
 
         return Response.status(Status.CREATED)
                 .entity(rental)
@@ -76,7 +82,7 @@ public class RentalResource {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response remove(@PathParam("id") String id) {
+    public Response remove(@PathParam("id") int id) {
         return rentalService.remove(id);
     }
 }

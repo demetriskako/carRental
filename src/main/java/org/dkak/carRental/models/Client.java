@@ -1,10 +1,9 @@
 package org.dkak.carRental.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.ws.rs.Path;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
@@ -26,6 +25,8 @@ public class Client {
 	private String email;
 	@Column(name="CLIENT_TELEPHONE_NO")
 	private String tel;
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	private List<Rental> rentals;
 		
 	public Client() {
 	

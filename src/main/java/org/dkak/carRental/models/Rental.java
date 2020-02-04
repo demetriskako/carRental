@@ -1,7 +1,5 @@
 package org.dkak.carRental.models;
 
-import org.joda.time.DateTime;
-
 import javax.persistence.*;
 import javax.ws.rs.Path;
 import java.util.Date;
@@ -15,29 +13,30 @@ public class Rental {
     private int id;
     @ManyToOne
     @JoinColumn(name="VEHICLE_LICENCE_NO")
-    private Vehicle licence;
+    private Vehicle vehicle;
     @ManyToOne
     @JoinColumn(name="CLIENT_ID")
-    private Client clientId;
-    @ManyToOne
+    private Client client;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="RENTAL_PICKUP_LOCATION")
-    private City pickupLocation;
+    private Store pickupLocation;
     @ManyToOne
     @JoinColumn(name="RENTAL_RETURN_LOCATION")
-    private City returnLocation;
+    private Store returnLocation;
     @Column(name="RENTAL_PICKUP_DATETIME")
     private Date pickupDatetime;
     @Column(name="RENTAL_RETURN_DATETIME")
     private Date returnDatetime;
-    @Column(name="RENTAL_TOTAL_COST", insertable=true, updatable = false, nullable = false)
+    @Column(name="RENTAL_TOTAL_COST")
     private int totalCost;
+
 
     public Rental() {
     }
 
-    public Rental(Vehicle licence, Client clientId, City pickupLocation, City returnLocation, Date pickupDatetime, Date returnDatetime, int totalCost) {
-        this.licence = licence;
-        this.clientId = clientId;
+    public Rental(Vehicle vehicle, Client client, Store pickupLocation, Store returnLocation, Date pickupDatetime, Date returnDatetime, int totalCost) {
+        this.vehicle = vehicle;
+        this.client = client;
         this.pickupLocation = pickupLocation;
         this.returnLocation = returnLocation;
         this.pickupDatetime = pickupDatetime;
@@ -53,35 +52,35 @@ public class Rental {
         this.id = id;
     }
 
-    public Vehicle getLicence() {
-        return licence;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
-    public void setLicence(Car licence) {
-        this.licence = licence;
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
-    public Client getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(Client clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public City getPickupLocation() {
+    public Store getPickupLocation() {
         return pickupLocation;
     }
 
-    public void setPickupLocation(City pickupLocation) {
+    public void setPickupLocation(Store pickupLocation) {
         this.pickupLocation = pickupLocation;
     }
 
-    public City getReturnLocation() {
+    public Store getReturnLocation() {
         return returnLocation;
     }
 
-    public void setReturnLocation(City returnLocation) {
+    public void setReturnLocation(Store returnLocation) {
         this.returnLocation = returnLocation;
     }
 

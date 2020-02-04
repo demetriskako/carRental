@@ -1,12 +1,8 @@
 package org.dkak.carRental.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.ws.rs.Path;
+import java.util.Set;
 
 @Entity
 @Table(name = "store")
@@ -21,6 +17,12 @@ public class Store {
 	@ManyToOne
     @JoinColumn(name="CITY_ID", nullable=false)
     private City city;
+	@OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+	private Set<Vehicle> vehicles;
+	@OneToMany(mappedBy = "pickupLocation", cascade = CascadeType.ALL)
+	private Set<Rental> pickupLocations;
+	@OneToMany(mappedBy = "returnLocation", cascade = CascadeType.ALL)
+	private Set<Rental> returnLocations;
 		 
 	public Store() {
 		

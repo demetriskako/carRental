@@ -92,14 +92,14 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="seats">Vehicle Seat No</label>
-					<input type="number" min="1" class="form-control" id="seats">
+					<input type="number" min="1" max="15" class="form-control" id="seats">
 				</div>
 			</div>
 
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="doors">Vehicle Door No</label>
-					<input type="number" min="1" class="form-control" id="doors">
+					<input type="number" min="1" max="5" class="form-control" id="doors">
 				</div>
 			</div>
 		</div>

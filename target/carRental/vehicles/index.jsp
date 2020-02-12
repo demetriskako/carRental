@@ -11,15 +11,15 @@
 		 		</div>
 		 		
 		 		<div class="row mb-2">
-					<a class="btn btn-primary" href="http://localhost:8080/carRental/vehicles/create.jsp" role="button">Add New Vehicle</a>			 
+					<a class="btn btn-primary" href="http://localhost:8080/carRental/vehicles/create.jsp" role="button">Add New Vehicle</a>
 		 		</div>			 
 	 		</div>
 	 
 		 	<div class="row">
 		 	 	<div class="col-md-12">
 					<div class="profile">
-				 	<table id="userdata" class="table">
-				 		<thead>
+				 	<table id="userdata" class="table table-striped">
+				 		<thead class="thead-dark">
 					        <th>Licence</th>
 					        <th>Model</th>
 					        <th>Fuel</th>

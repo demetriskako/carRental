@@ -6,11 +6,20 @@
 
     <div class="container">
         <div class="content">
+            <div class="row p-4">
+                <div class="col-md-10">
+                    <h2>Rentals</h2>
+                </div>
+                <div class="col-md-2">
+                    <a class="btn btn-primary" href="http://localhost:8080/carRental/rental/search.jsp" role="button">Make New Rent</a>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="profile">
-                        <table id="userdata" class="table">
-                            <thead>
+                        <table id="userdata" class="table table-striped">
+                            <thead class="thead-dark">
                                 <th>ID</th>
                                 <th>Vlihicle Plates</th>
                                 <th>Client</th>
@@ -49,8 +58,8 @@
                         + "<td>" + data[f].returnLocation.name + "</td>"
                         + "<td>" + data[f].returnDatetime + "</td>"
                         + "<td>" + data[f].totalCost + "</td>"
-                        + "<td><a type='button' href='http://localhost:8080/carRental/rental/update.jsp?id="  + data[f].id + "' class='btn btn-primary mr-2'>Edit</a>"
-                        + "<button id='deleteButton"+ data[f].id +"' class='btn btn-danger'>Delete</button></td>"
+                        + "<td>"
+                        + "<button id='deleteButton"+ data[f].id +"' class='btn btn-danger'>Cancel</button></td>"
                         + "</tr>";
 
                     $(tblRow).appendTo("#userdata tbody");

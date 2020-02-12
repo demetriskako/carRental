@@ -1,4 +1,4 @@
-package org.dkak.carRental.resources;
+package org.dkak.carRental.controllers;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import org.dkak.carRental.models.City;
 import org.dkak.carRental.services.CityService;
 
 @Path("/cities")
-public class CityResource {
+public class CityController {
 	
 	private CityService cityService = new CityService();
 	
@@ -67,5 +67,4 @@ public class CityResource {
 	public Response remove(@PathParam("cityId") String id) {
 		return cityService.remove(id); 
 	}
-	
 }

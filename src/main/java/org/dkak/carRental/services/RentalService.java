@@ -56,11 +56,7 @@ public class RentalService {
         }
 
         Vehicle vehicle = session.find(Vehicle.class, licence);
-
-//        City deliveryCity = session.find(City.class, delivery_place);
         Store deliveryLocation = vehicle.getStore();
-
-//        City returnCity = session.find(City.class, return_place);
         Store returnLocation = vehicle.getStore();
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");

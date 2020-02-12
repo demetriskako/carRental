@@ -26,7 +26,7 @@ public class Vehicle {
 	private String vehicle_type;
 	@Column(name="TYPE", insertable=false, updatable = false, nullable = false)
 	private String type;
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name="STORE_ID", nullable=false)
     private Store store;
 	@OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)

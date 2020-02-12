@@ -17,8 +17,8 @@
 		 		<div class="row">
 		 	 		<div class="col-md-12">
 						<div class="profile">
-					 		<table id="userdata" class="table">
-						 		<thead>
+					 		<table id="userdata" class="table table-striped">
+						 		<thead class="thead-dark">
 							        <th>Store ID</th>
 							        <th>Store Name</th>
 							        <th>City </th>

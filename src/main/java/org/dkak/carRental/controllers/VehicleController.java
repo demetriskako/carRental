@@ -1,7 +1,6 @@
-package org.dkak.carRental.resources;
+package org.dkak.carRental.controllers;
 
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -19,16 +18,14 @@ import javax.ws.rs.core.Response.Status;
 
 import org.dkak.carRental.exceptions.GenericException;
 import org.dkak.carRental.models.Car;
-import org.dkak.carRental.models.City;
 import org.dkak.carRental.models.TwoWheeled;
 import org.dkak.carRental.models.Vehicle;
 import org.dkak.carRental.services.CarService;
 import org.dkak.carRental.services.TwoWheeledService;
 import org.dkak.carRental.services.VehicleService;
-import org.hibernate.HibernateException;
 
 @Path("/vehicles")
-public class VehicleResource {
+public class VehicleController {
 
 	private TwoWheeledService twoWheeledService = new TwoWheeledService();
 	private CarService carService = new CarService();

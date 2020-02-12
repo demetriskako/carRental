@@ -1,4 +1,4 @@
-package org.dkak.carRental.resources;
+package org.dkak.carRental.controllers;
 
 import java.util.List;
 
@@ -19,10 +19,10 @@ import org.dkak.carRental.models.Store;
 import org.dkak.carRental.services.StoreService;
 
 @Path("/stores")
-public class StoreResource {
+public class StoreController {
 	private StoreService storeService;
 	
-	public StoreResource() {
+	public StoreController() {
 		this.storeService = new StoreService();
 	}
 	

@@ -11,7 +11,7 @@
           
          <div class="form-group">
         	<label for="id">City ID: </label>
-        	<input type="text" class="form-control" id="id">	
+        	<input type="text" class="form-control" id="id" disabled>
         </div>
         <div class="form-group">
         	<label for="name">City Name: </label>

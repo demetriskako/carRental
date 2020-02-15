@@ -34,7 +34,7 @@
 				
 				<div class="col-md-6">
 					<div class="form-group">
-						<label for="storeId">Surname</label>
+						<label for="surname">Surname</label>
 					 	<input type="text" class="form-control" id="surname">	
 					 </div>
 				</div> 

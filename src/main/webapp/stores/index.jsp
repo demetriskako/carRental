@@ -64,8 +64,7 @@
 				      		});
 						 });
 				   	})
-				 })
-				 .error(function() { alert("Database Error") });
+				 });
 			 });
 		 });
 	</script>

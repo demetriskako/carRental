@@ -8,10 +8,10 @@
         <div class="content">
             <div class="row p-4">
                 <div class="col-md-10">
-                    <h2>Rentals</h2>
+                    <h2>Active Rentals</h2>
                 </div>
                 <div class="col-md-2">
-                    <a class="btn btn-primary" href="http://localhost:8080/carRental/rental/search.jsp" role="button">Make New Rent</a>
+                    <a class="btn btn-primary" href="http://localhost:8080/carRental/rental/search.jsp" role="button">Make New Rental</a>
                 </div>
             </div>
 

@@ -39,7 +39,7 @@
 <script>
 	 $(document).ready(function($){
 		 $(function() { 
-			 var people = [];
+			 let people = [];
 			  $.getJSON('http://localhost:8080/carRental/webapi/clients/', function(data) {
 			    $.each(data, function(f) {
 			    	console.log();
@@ -68,8 +68,7 @@
 			      		});
 					 });
 			   	});
-			  })
-			  .error(function() { alert("Database Error"); });
+			  });
 		 });
 	 });
 </script>

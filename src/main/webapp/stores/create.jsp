@@ -11,14 +11,14 @@
 			<div class="row"> 	
 	        	<div class="col-md-6">     	
 			        <div class="form-group">
-				       	<%--@declare id="email"--%><label for="email">Store ID: </label>
+				       	<%--@declare id="email"--%><label for="id">Store ID: </label>
 				       	<input type="text" class="form-control" id="id">	
 			        </div>
 			    </div>
 			    
 			    <div class="col-md-6">
 			        <div class="form-group">
-			        	<label for="email">Store Name: </label>
+			        	<label for="name">Store Name: </label>
 			        	<input type="text" class="form-control" id="name">	
 			        </div>
 				</div>
@@ -41,24 +41,12 @@
 	</body>
 
 	<script>
-		$(document).ready(function($){  
-			 
-			 window.onload = function() {
-				$.ajax({
-		 			url: "http://localhost:8080/carRental/webapi/cities",
-		 			type: "GET",
-			 		success: function(data){
-			 			let cities = data
-			 			
-			 			cities.map( (city) => {
-			 				$("#city").append("<option value=" + city.id + ">" + city.name + "</option>")
-			 			})
-					},
-					error: function(data) { 
-		 		        alert("There was an Error!"); 
-		 		    }  
+		$(document).ready(function($){
+			$.getJSON('http://localhost:8080/carRental/webapi/cities', function(data) {
+				data.map( (city) => {
+					$("#city").append("<option value=" + city.id + ">" + city.name + "</option>")
 				})
-			};
+			});
 			 
 		 	 $("#saveButton").on("click", function(){
 		 		$.ajax({

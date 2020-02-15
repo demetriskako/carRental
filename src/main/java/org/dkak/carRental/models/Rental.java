@@ -17,10 +17,10 @@ public class Rental {
     @ManyToOne
     @JoinColumn(name="CLIENT_ID")
     private Client client;
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name="RENTAL_PICKUP_LOCATION")
     private Store pickupLocation;
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name="RENTAL_RETURN_LOCATION")
     private Store returnLocation;
     @Column(name="RENTAL_PICKUP_DATETIME")
@@ -29,6 +29,7 @@ public class Rental {
     private Date returnDatetime;
     @Column(name="RENTAL_TOTAL_COST")
     private int totalCost;
+
 
     public Rental() {
     }

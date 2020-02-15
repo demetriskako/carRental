@@ -1,4 +1,4 @@
-package org.dkak.carRental.controllers;
+package org.dkak.carRental.resources;
 
 import java.util.List;
 
@@ -19,11 +19,11 @@ import org.dkak.carRental.models.Client;
 import org.dkak.carRental.services.ClientService;
 
 @Path("/clients")
-public class ClientController {
+public class ClientResource {
 	
 	private ClientService clientService;
 	
-	public ClientController() {
+	public ClientResource() {
 		this.clientService = new ClientService();
 	}
 	

@@ -1,6 +1,8 @@
 package org.dkak.carRental.models;
 
 import java.util.List;
+
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.ws.rs.Path;
 
@@ -14,7 +16,8 @@ public class City {
 	private String id;
 	@Column(name="CITY_NAME")
 	private String name;
-	@OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "city", cascade = CascadeType.ALL)
+	@JsonbTransient	
 	private List<Store> stores;
 
 	public City() {
@@ -36,6 +39,10 @@ public class City {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Store> getStores() {
+		return stores;
 	}
 	
 }

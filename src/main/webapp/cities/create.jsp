@@ -6,26 +6,26 @@
 		<div class="container">
 	       	<div class="row p-4">
 				<h2>Create City</h2>
-			</div>	
-	              
-	        <div class="row"> 	
+			</div>
+
+	        <div class="row">
 	        	<div class="col-md-6">
 			        <div class="form-group">
-				       	<label for="email">City ID: </label>
-				       	<input type="text" class="form-control" id="id">	
+				       	<label for="id">City ID: </label>
+				       	<input type="text" class="form-control" id="id">
 			        </div>
 		        </div>
-		        
+
 		        <div class="col-md-6">
 			        <div class="form-group">
-			        	<label for="email">City Name: </label>
-			        	<input type="text" class="form-control" id="name">	
+			        	<label for="name">City Name: </label>
+			        	<input type="text" class="form-control" id="name">
 			        </div>
 		        </div>
 	        </div>
-	               
+
 	        <button id="saveButton" class="btn btn-primary">Save</button>
-			<a href="http://localhost:8080/carRental/cities/" class="btn btn-danger">Back</a>      
+			<a href="http://localhost:8080/carRental/cities/" class="btn btn-danger">Back</a>
 		</div>
 	</body>
 

@@ -45,7 +45,7 @@ public class RentalService {
                      String drivingLicense, String email,
                      String address, String tel) throws ParseException {
 
-        Client client;
+        Client client = null;
 
         if(!clientID.equals("") && !name.equals("") && !surname.equals("") && !drivingLicense.equals("")
                 && !email.equals("") && !address.equals("") && !tel.equals("") ){
@@ -56,8 +56,12 @@ public class RentalService {
         }
 
         Vehicle vehicle = session.find(Vehicle.class, licence);
-        Store deliveryLocation = vehicle.getStore();
-        Store returnLocation = vehicle.getStore();
+
+        City deliveryCity = session.find(City.class, delivery_place);
+        Store deliveryLocation = deliveryCity.getStores().get(0);
+
+        City returnCity = session.find(City.class, return_place);
+        Store returnLocation = returnCity.getStores().get(0);
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date deliveryDatetime = formatter.parse(delivery_date);

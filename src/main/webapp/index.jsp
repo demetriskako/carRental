@@ -3,9 +3,15 @@
  
  	<body>
 		<%@include file="../partials/navigation.html" %>
-	
+
 	 	<div class="container-fluid">
-			<h2>Welcome to Car Rental wep app!</h2>
+			<div class="content">
+				<div class="row">
+					<div class="col-md-10">
+						<h2>Welcome to CarRental App!</h2>
+					</div>
+				</div>
+			</div>
 	 	</div>
 	</body>
 

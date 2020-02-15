@@ -83,6 +83,7 @@ public class ClientService {
 			existingClient.setAddress(address);
 			existingClient.setEmail(email);
 			existingClient.setTel(tel);
+			existingClient.setLicense(licence);
 			existingClient.setAddress(address);
 
 			session.update(existingClient); 

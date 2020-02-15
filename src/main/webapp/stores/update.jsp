@@ -13,7 +13,7 @@
 		        <div class="col-md-6">  
 			        <div class="form-group">
 				       	<label for="id">Store ID:</label>
-				       	<input type="text" class="form-control" id="id">	
+				       	<input type="text" class="form-control" id="id" disabled>
 			        </div>
 		        </div>
 		        
@@ -29,7 +29,7 @@
 	        <div class="row"> 	
 		        <div class="col-md-6">  
 			        <div class="form-group">
-						<label for="exampleFormControlSelect2">Select city</label>
+						<label for="city">Select city</label>
 						<select class="form-control" id="city">
 						</select>
 				    </div>
@@ -42,19 +42,19 @@
 	</body>
 
 	<script>
-	 $(document).ready(function($){  
+	 $(document).ready(function($){
 		 //Get cities data
 		 $.getJSON('http://localhost:8080/carRental/webapi/cities', function(data) {
 			 data.map( (city) => {
 					$("#city").append("<option value=" + city.id + ">" + city.name + "</option>")
 			 })
-		  }).error(function() { alert("Database Error") });
-		 
+		  });
+
 		 //Get store data
 		 $.getJSON('http://localhost:8080/carRental/webapi/stores/<%= request.getParameter("id") %>', function(data) {
-			  $("#name").val(data.name)
-			  $("#id").val(data.id)
-		  }).error(function() { alert("Database Error") });
+			  $("#name").val(data.name);
+			  $("#id").val(data.id);
+		  });
 		 
 	 	 $("#updateButton").on("click", function(){
 	 		$.ajax({

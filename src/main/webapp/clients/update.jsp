@@ -12,7 +12,7 @@
 		      	<div class="col-md-6">
 			        <div class="form-group">
 				       	<label for="id">Client ID</label>
-				       	<input type="text" class="form-control" id="id">	
+				       	<input type="text" class="form-control" id="id" disabled>
 				    </div>
 				</div>
 				
@@ -34,7 +34,7 @@
 				
 				<div class="col-md-6">
 					<div class="form-group">
-						<label for="storeId">Surname</label>
+						<label for="surname">Surname</label>
 					 	<input type="text" class="form-control" id="surname">	
 					 </div>
 				</div> 
@@ -73,13 +73,13 @@
 	<script>
 		 $(document).ready(function($){
 			  $.getJSON('http://localhost:8080/carRental/webapi/clients/<%= request.getParameter("id") %>', function(data) {
-				  $("#id").val(data.id)
-				  $("#name").val(data.name)
-				  $("#surname").val(data.surname)
-				  $("#license").val(data.license)
-				  $("#email").val(data.email)
-				  $("#tel").val(data.tel)
-				  $("#address").val(data.address)
+				  $("#id").val(data.id);
+				  $("#name").val(data.name);
+				  $("#surname").val(data.surname);
+				  $("#license").val(data.license);
+				  $("#email").val(data.email);
+				  $("#tel").val(data.tel);
+				  $("#address").val(data.address);
 			  });
 			   
 	      	 $("#updateButton").on("click", function(){

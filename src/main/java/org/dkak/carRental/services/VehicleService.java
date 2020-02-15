@@ -52,11 +52,7 @@ public class VehicleService {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Date deliveryDatetime = formatter.parse(delivery_date);
 		java.sql.Date sqlDeliveryDate = new java.sql.Date(deliveryDatetime.getTime());
-
-		//if not receive cost as parameter then set it to big int
-		if(cost == 0){
-			cost = 1000;
-		}
+		Date returnDatetime = formatter.parse(return_date);
 
 		List<String> activeRents = session.createQuery("select vehicle.licence from Rental R" +
                 " where R.returnDatetime > :delivery_date", String.class)

@@ -81,6 +81,8 @@
 				<label for="luggage">Vehicle Luggage Support</label>
 				<select class="form-control" id="luggage">
 					<option disabled selected>Please Select</option>
+					<option>Yes</option>
+					<option>No</option>
 				</select>
 			</div>
 		</div>

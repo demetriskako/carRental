@@ -88,10 +88,10 @@
                     <table id="userdata" class="table">
                         <thead>
                         <th>Licence</th>
-                        <th>Store</th>
+                        <th>Model</th>
                         <th>Location</th>
                         <th>Type</th>
-                        <th>Model</th>
+                        <th>Store</th>
                         <th>Cost per Day</th>
                         <th style="width: 20%">Actions</th>
                         </thead>
@@ -102,7 +102,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 
@@ -124,11 +123,13 @@
     };
 
     $('#datetimepicker1').datetimepicker({
-        format:'DD/MM/YYYY HH:mm'
+        format:'DD/MM/YYYY HH:mm',
+        placeholder: 'Select delivery date'
     });
 
     $('#datetimepicker2').datetimepicker({
-        format: 'DD/MM/YYYY HH:mm'
+        format: 'DD/MM/YYYY HH:mm',
+        placeholder: 'Select return date'
     });
 
     $("#searchButton").on("click", function(){
@@ -154,7 +155,7 @@
                     var tblRow = "<tr>"
                         + "<td>" + data[f].licence + "</td>" + "<td>" + data[f].model + "</td>"
                         + "<td>" + data[f].fuel + "</td>" + "<td>" + data[f].vehicle_type + "</td>"
-                        + "<td>" + data[f].model + "</td>" + "<td>" + data[f].cost + "</td>"
+                        + "<td>" + data[f].store.name + "</td>" + "<td>" + data[f].cost + "</td>"
                         + "<td>"
                         + "<a type='button' href='http://localhost:8080/carRental/rental/create.jsp?licence="  + data[f].licence +
                         "&delivery_place=" + $('#delivery_place').val() + "&delivery_date=" + $('#delivery_date').val()
